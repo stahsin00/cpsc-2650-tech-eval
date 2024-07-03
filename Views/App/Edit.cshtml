@@ -1,0 +1,8 @@
+@model TodoItem
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+	@Html.HiddenFor(model => model.Id)
+	@Html.EditorFor(model => model.Name)
+}
