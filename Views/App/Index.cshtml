@@ -14,10 +14,17 @@
             {
                 @Html.AntiForgeryToken()
                 @Html.CheckBoxFor(m => todoItem.IsComplete, new { onclick = "this.form.submit();" })
-                <span>@todoItem.Name @todoItem.IsComplete</span>
+                <span class="@(todoItem.IsComplete ? "completed" : "")">@todoItem.Name</span>
                 @Html.ActionLink("Edit", "Edit", new { id = todoItem.Id })
                 @Html.ActionLink("Delete", "Delete", new { id = todoItem.Id })
             }
         </div>
     }
 </div>
+
+<style>
+    .completed {
+        color: grey;
+        text-decoration: line-through;
+    }
+</style>
