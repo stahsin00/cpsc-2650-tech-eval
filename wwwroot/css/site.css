@@ -20,3 +20,59 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.todo-display {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  height: 70vh;
+  overflow: auto;
+}
+
+.todo-item {
+  padding: 10px;
+  border-bottom: 1px solid lightgray;
+  position: relative;
+}
+
+.item-name {
+  font-size: medium;
+  padding-left: 10px;
+}
+
+.todo-display > :last-child {
+  border-bottom: none;
+}
+
+.action-link {
+  color: white;
+  text-decoration: none;
+  border-radius: 2px;
+  padding: 2px 5px;
+}
+
+.edit-link {
+  background-color: darkslategray;
+  margin-right: 2px;
+}
+
+.delete-link {
+  background-color: darkred;
+}
+
+.edit-link:hover {
+  color: white;
+  background-color: rgb(99, 139, 139);
+}
+
+.delete-link:hover {
+  color: white;
+  background-color: rgb(206, 32, 32);
+}
+
+.actions {
+  position: absolute;
+  right: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+}

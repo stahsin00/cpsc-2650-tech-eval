@@ -7,19 +7,23 @@
         @Html.AntiForgeryToken()
         <input name="Name" autofocus>
     }
-    @foreach (var todoItem in Model)
-    {
-        <div>
-            @using (Html.BeginForm("ToggleComplete", "App", new { id = todoItem.Id }, FormMethod.Post))
-            {
-                @Html.AntiForgeryToken()
-                @Html.CheckBoxFor(m => todoItem.IsComplete, new { onclick = "this.form.submit();" })
-                <span class="@(todoItem.IsComplete ? "completed" : "")">@todoItem.Name</span>
-                @Html.ActionLink("Edit", "Edit", new { id = todoItem.Id })
-                @Html.ActionLink("Delete", "Delete", new { id = todoItem.Id })
-            }
-        </div>
-    }
+    <div class="todo-display">
+        @foreach (var todoItem in Model)
+        {
+            <div class="todo-item">
+                @using (Html.BeginForm("ToggleComplete", "App", new { id = todoItem.Id }, FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.CheckBoxFor(m => todoItem.IsComplete, new { onclick = "this.form.submit();" })
+                    <span class="@(todoItem.IsComplete ? "item-name completed" : "item-name")">@todoItem.Name</span>
+                    <div class="actions">
+                        @Html.ActionLink("Edit", "Edit", new { id = todoItem.Id }, new { @class = "action-link edit-link" })
+                        @Html.ActionLink("Delete", "Delete", new { id = todoItem.Id }, new { @class = "action-link delete-link" })
+                    </div>
+                }
+            </div>
+        }
+    </div>
 </div>
 
 <style>
