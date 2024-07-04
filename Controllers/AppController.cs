@@ -49,6 +49,22 @@ public class AppController : Controller
 
         return RedirectToAction("Index");
     }
+    
+    [HttpPost]
+    public async Task<IActionResult> ToggleComplete(long id)
+    {
+        var todoItem = await _context.TodoItems.FindAsync(id);
+
+        if (todoItem == null)
+        {
+            return NotFound();
+        }
+
+        todoItem.IsComplete = !todoItem.IsComplete;
+        await _context.SaveChangesAsync();
+
+        return RedirectToAction("Index");
+    }
 
     [HttpGet]
     public async Task<IActionResult> Delete(long id)
