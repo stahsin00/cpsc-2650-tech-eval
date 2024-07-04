@@ -2,16 +2,29 @@
 
 <h1>To-do List</h1>
 <div>
-	@using (Html.BeginForm())
-	{
-    	@Html.AntiForgeryToken()
-		<input name="Name" autofocus>
-	}
-	@foreach (var todoItem in Model) {
-		<div>
-			<span>@todoItem.Name</span>
-			@Html.ActionLink("Edit", "Edit", new { id = todoItem.Id })
-			@Html.ActionLink("Delete", "Delete", new { id = todoItem.Id })
-		</div>
-	}
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <input name="Name" autofocus>
+    }
+    @foreach (var todoItem in Model)
+    {
+        <div>
+            @using (Html.BeginForm("ToggleComplete", "App", new { id = todoItem.Id }, FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.CheckBoxFor(m => todoItem.IsComplete, new { onclick = "this.form.submit();" })
+                <span class="@(todoItem.IsComplete ? "completed" : "")">@todoItem.Name</span>
+                @Html.ActionLink("Edit", "Edit", new { id = todoItem.Id })
+                @Html.ActionLink("Delete", "Delete", new { id = todoItem.Id })
+            }
+        </div>
+    }
 </div>
+
+<style>
+    .completed {
+        color: grey;
+        text-decoration: line-through;
+    }
+</style>
