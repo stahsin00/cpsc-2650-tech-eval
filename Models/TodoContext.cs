@@ -8,4 +8,14 @@ public class TodoContext : DbContext
         : base(options) { }
 
     public DbSet<TodoItem> TodoItems { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<TodoItem>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired();
+            entity.Property(e => e.IsComplete).HasDefaultValue(false);
+        });
+    }
 }
